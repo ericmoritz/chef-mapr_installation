@@ -6,8 +6,10 @@ This cookbook will automate the steps outlined in the 'Preparing your nodes' sec
 
 Note that this cookbook disables both selinux and iptables.  A list of MapR ports is available at http://doc.mapr.com/display/MapR/Ports+Used+by+MapR .
 
---------- install_mapr_chef.sh usage -----------------
 This cookbook will also automate the installation of a MapR Yarn cluster.
+
+
+--------- install_mapr_chef.sh usage -----------------
 
 NOTE:  The attached shell script automates the following steps:
   1.  Creates a log dir, ~/mapr_install_logs (if not already done)

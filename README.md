@@ -35,7 +35,7 @@ There are a number of configurable attributes, all located in attributes/default
 
 The below are hashed password values for both root and the mapr_user, which defaults to mapr.  Generally, users leave mapr as the default user.  'openssl passwd -1' should be used to alter the below as this README will not include the values of the below..  
 
-```
+```ruby
 default[:mapr][:password] = "$1$x4GGdWjX$5IZsb6wdcgGjzdSKK6yd6/"
 default[:root][:password] = "$1$PvTToSKD$CDPWULL69FK00rQy7R6Rt."
 ```
@@ -85,7 +85,7 @@ default[:mapr][:version] = "4.0.2"
 
 The disks MapR should use for installation.  These MUST be raw, unformatted drives.  A list can be confirmed w/ lsblk.
 
-```
+```ruby
 default[:mapr][:node][:disks] = "/dev/xvdf,/dev/xvdg"
 ```
 

@@ -7,12 +7,12 @@
 
 log "\n=========== Start MapR clush.rb =============\n"
 
-all = node['mapr']['cluster_nodes'].reject(&:empty?).join(',')
-cldb_nodes = node['mapr']['cldb'].reject(&:empty?).join(',')
-zk_nodes = node['mapr']['zk'].reject(&:empty?).join(',')
-rm_nodes = node['mapr']['rm'].reject(&:empty?).join(',')
-ws_nodes = node['mapr']['ws'].reject(&:empty?).join(',')
-hs_server = node['mapr']['hs']
+all = node['mapr']['cluster_node_ips'].reject(&:empty?).join(',')
+cldb_nodes = node['mapr']['cldb_ips'].reject(&:empty?).join(',')
+zk_nodes = node['mapr']['zk_ips'].reject(&:empty?).join(',')
+rm_nodes = node['mapr']['rm_ips'].reject(&:empty?).join(',')
+ws_nodes = node['mapr']['ws_ips'].reject(&:empty?).join(',')
+hs_server = node['mapr']['hs_ips']
 
 # Install clush
 ruby_block "Installing clush" do

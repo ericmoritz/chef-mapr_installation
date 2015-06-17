@@ -1,9 +1,9 @@
 log "\n=========== Start MapR mapr_configure.rb =============\n"
 
 #Make sane list of appropriate nodes...might be a better way to do this...
-cldb_nodes = node['mapr']['cldb'].reject(&:empty?).join(',') 
-zk_nodes = node['mapr']['zk'].reject(&:empty?).join(',')
-rm_nodes = node['mapr']['rm'].reject(&:empty?).join(',')
+cldb_nodes = node['mapr']['cldb_ips'].reject(&:empty?).join(',') 
+zk_nodes = node['mapr']['zk_ips'].reject(&:empty?).join(',')
+rm_nodes = node['mapr']['rm_ips'].reject(&:empty?).join(',')
 
 
 #Run configure.sh to configure the nodes, do NOT bring the cluster up

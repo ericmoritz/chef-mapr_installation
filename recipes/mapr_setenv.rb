@@ -9,7 +9,7 @@ ruby_block 'Edit /opt/mapr/conf/env.sh' do
   end
 end
 
-mapr_dir = Mixlib::Shell.out('ls /|grep mapr')
+mapr_dir = Mixlib::ShellOut.new('ls /|grep mapr')
 
 # Create /mapr...maybe not the most efficient way to do this...
 execute 'Create /mapr' do

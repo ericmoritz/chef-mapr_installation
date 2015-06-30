@@ -129,7 +129,7 @@ warden_running = '0'
 ruby_block 'Getting running warden count' do
   block do
     while warden_running.to_s != node['mapr']['node_count']
-      wc = Mixlib::Shell.out('maprcli node list -columns hostname|grep -v "hostname                      ip"|wc -l')
+      wc = Mixlib::ShellOut.new('maprcli node list -columns hostname|grep -v "hostname                      ip"|wc -l')
       warden_running = /#{node["mapr"]["node_count"]}/.match(wc)
       Mixlib::Shell.out('sleep 20')
     end

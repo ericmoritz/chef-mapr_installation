@@ -2,7 +2,7 @@ log "\n=========== Start MapR selinux.rb =============\n"
 
 # selinux = "Disabled"
 
-if Mixlib::Shell.out('getenforce') != 'Disabled'
+if Mixlib::ShellOut.new('getenforce') != 'Disabled'
   execute 'Setting SeLinux to Permissive mode' do
     command 'setenforce 0'
     action :run

@@ -11,5 +11,5 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[mapr_installation::default]
+      - recipe[mapr_installation::install_prereq_packages]
     attributes:

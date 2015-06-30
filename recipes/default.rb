@@ -12,11 +12,11 @@ include_recipe 'mapr_installation::iptables'
 include_recipe 'mapr_installation::clush'
 include_recipe 'mapr_installation::user_mapr'
 
-include_recipe 'mapr_installation::user_root' if node['mapr']['manage_root'] == 'Yes'
+include_recipe 'mapr_installation::user_root' if node['mapr']['manage_root'] == true
 
 include_recipe 'mapr_installation::validate_host'
 
-include_recipe 'mapr_installation::ssh' if node['mapr']['manage_ssh'] == 'Yes'
+include_recipe 'mapr_installation::ssh' if node['mapr']['manage_ssh'] == true
 
 include_recipe 'ntp'
 
@@ -83,7 +83,7 @@ end
 if is_cldb == 'yes'
   include_recipe 'mapr_installation::mapr_start_warden'
 else
-  execute 'sleep fopr cldb' do
+  execute 'sleep for cldb' do
     command 'sleep 120'
   end
 end
@@ -95,7 +95,7 @@ run_check = 'no'
 ruby_block 'Warden running?' do
   block do
     while warden_running == 'no'
-      run_check = Mixlib::ShellOut.new('service mapr-warden status')
+      run_check = Mixlib::ShellOut.new('/sbin/service mapr-warden status')
       rc = /process/.match(run_check)
       if rc.to_s == 'process'
         warden_running = 'yes'

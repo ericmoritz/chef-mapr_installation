@@ -65,4 +65,64 @@ describe 'mapr_installation::default' do
     expect(chef_run).to install_package('dmidecode')
   end
 
+  it 'installs package glibc' do
+    expect(chef_run).to install_package('glibc')
+  end
+
+  it 'installs package hdparm' do
+    expect(chef_run).to install_package('hdparm')
+  end
+
+  it 'installs package initscripts' do
+    expect(chef_run).to install_package('initscripts')
+  end
+
+  it 'installs package iputils' do
+    expect(chef_run).to install_package('iputils')
+  end
+
+  it 'installs package irqbalance' do
+    expect(chef_run).to install_package('irqbalance')
+  end
+
+  it 'installs package libgcc' do
+    expect(chef_run).to install_package('libgcc')
+  end
+
+  it 'installs package libstdc++' do
+    expect(chef_run).to install_package('libstdc++')
+  end
+
+  it 'installs package redhat-lsb-core' do
+    expect(chef_run).to install_package('redhat-lsb-core')
+  end
+
+  it 'installs package rpm-libs' do
+    expect(chef_run).to install_package('rpm-libs')
+  end
+
+  it 'installs package sdparm' do
+    expect(chef_run).to install_package('sdparm')
+  end
+
+  it 'installs package shadow-utils' do
+    expect(chef_run).to install_package('shadow-utils')
+  end
+
+  it 'installs package syslinux' do
+    expect(chef_run).to install_package('syslinux')
+  end
+
+  it 'installs package unzip' do
+    expect(chef_run).to install_package('unzip')
+  end
+
+  it 'installs package zip' do
+    expect(chef_run).to install_package('zip')
+  end
+
+  it 'installs package nc' do
+    expect(chef_run).to install_package('nc')
+  end
+
 end

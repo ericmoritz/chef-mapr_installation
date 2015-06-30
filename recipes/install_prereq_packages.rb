@@ -1,4 +1,4 @@
-log "\n=========== Start MapR install_mapr_prereqs.rb =============\n"
+log '\n=========== Start MapR install_mapr_prereqs.rb =============\n'
 
 package 'bash'
 package 'rpcbind'
@@ -28,16 +28,27 @@ package 'patch'
 package 'dstat'
 package 'lsof'
 
-package "#{node['java']['version']}"
+java_version = node['java']['version']
 
-#Add JAVA_HOME to /etc/profile
-ruby_block "Set JAVA_HOME in /etc/profile" do
+bash 'Install_java' do
+  code <<-EOH
+    yum -y install #{java_version}
+  EOH
+end
+
+# Add JAVA_HOME to /etc/profile
+ruby_block 'Set JAVA_HOME in /etc/profile' do
   block do
-        file  = Chef::Util::FileEdit.new("/etc/profile")
-        file.insert_line_if_no_match("export JAVA_HOME=#{node[:java][:home]}","\nexport JAVA_HOME=#{node[:java][:home]}")
-	file.insert_line_if_no_match("export EDITOR=vi","export EDITOR=vi")
-
-	file.write_file
+    file  = Chef::Util::FileEdit.new('/etc/profile')
+    file.insert_line_if_no_match('export JAVA_HOME=#{node[:java][:home]}', '\nexport JAVA_HOME=#{node[:java][:home]}')
+    file.insert_line_if_no_match('export EDITOR=vi', 'export EDITOR=vi')
+    file.write_file
   end
 end
 
+bash 'turn_on_rpcbind' do
+  code <<-EOH
+    service rpcbind start
+    chkconfig rpcbind on
+  EOH
+end

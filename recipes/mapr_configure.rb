@@ -14,7 +14,7 @@ config_command << "-HS #{node['mapr']['hs_ips']}"
 config_command << "-D #{node['mapr']['node']['disks']}"
 config_command << "-N #{node['mapr']['clustername']}"
 config_command << '-no-autostart'
-config_command.join(' ')
+config_command = config_command.join(' ')
 
 # Run configure.sh to configure the nodes, do NOT bring the cluster up
 

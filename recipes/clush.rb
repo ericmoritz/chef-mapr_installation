@@ -21,6 +21,15 @@ ruby_block 'Installing clush' do
   end
 end
 
+# creating directory if it does not exist
+
+directory '/etc/clustershell' do
+  owner 'root'
+  group 'root'
+  mode '0755'
+  action :create
+end
+
 # groups file
 template '/etc/clustershell/groups' do
   source 'clustershell.groups.erb'

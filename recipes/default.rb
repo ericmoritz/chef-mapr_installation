@@ -111,7 +111,7 @@ cldb_running = 'no'
 ruby_block 'CLDB up and running?' do
   block do
     while cldb_running == 'no'
-      run_check = Mixlib::ShellOut.new('maprcli node clbmaster')
+      run_check = Mixlib::ShellOut.new('maprcli node cldbmaster')
       rc = /ServerID/.match(run_check)
       if rc.to_s == 'ServerID'
         cldb_running = 'yes'

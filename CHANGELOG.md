@@ -3,6 +3,10 @@ mapr_installation CHANGELOG
 
 This file is used to list changes made in each version of the mapr_installation cookbook.
 
+0.2.6
+-----
+- [daniel washko] - fixing maprcli command in default recipe
+
 0.2.5
 -----
 - [daniel washko] - fixing configure command

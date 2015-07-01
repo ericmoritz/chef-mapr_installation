@@ -10,7 +10,7 @@ config_command << "#{node['mapr']['home']}/server/configure.sh"
 config_command << "-C #{cldb_nodes}" unless cldb_nodes.empty?
 config_command << "-Z #{zk_nodes}" unless zk_nodes.empty?
 config_command << "-RM #{rm_nodes}" unless rm_nodes.empty?
-config_command << "-HS #{nodes['mapr']['hs_ips']}"
+config_command << "-HS #{node['mapr']['hs_ips']}"
 config_command << "-D #{node['mapr']['node']['disks']}"
 config_command << "-N #{node['mapr']['clustername']}"
 config_command << '-no-autostart'

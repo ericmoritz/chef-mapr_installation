@@ -3,6 +3,10 @@ mapr_installation CHANGELOG
 
 This file is used to list changes made in each version of the mapr_installation cookbook.
 
+0.2.4
+-----
+- [daniel washko] - putting configure command into an array and writing the command out with a join.
+
 0.2.3
 -----
 - [daniel Washko] - Altering the way the mapr directory is created in the setenv recipe

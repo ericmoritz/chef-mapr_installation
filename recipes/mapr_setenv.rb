@@ -12,10 +12,12 @@ end
 mapr_dir = Mixlib::ShellOut.new('ls /|grep mapr')
 
 # Create /mapr...maybe not the most efficient way to do this...
-execute 'Create /mapr' do
-  command 'mkdir /mapr'
-  only_if  mapr_dir == "mapr
-  "
+directory '/mapr' do
+  owner 'root'
+  group 'root'
+  mode '0755'
+  action :create
+  only_if { mapr_dir != 'mapr' }
 end
 
 # Create a mapr_fstab file so mapr-nfsserver can automount /mapr

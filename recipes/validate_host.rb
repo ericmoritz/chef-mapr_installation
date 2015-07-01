@@ -50,16 +50,16 @@ end
 
 file '/etc/yum.repos.d/maprtech.repo' do
   content "[maprtech]
-  name=MapR Technologies
-  baseurl=http://package.mapr.com/releases/v#{node['mapr']['version']}/redhat/
-  enabled=1
-  gpgcheck=0
-  protect=1
+name=MapR Technologies
+baseurl=http://package.mapr.com/releases/v#{node['mapr']['version']}/redhat/
+enabled=1
+gpgcheck=0
+protect=1
 
-  [maprecosystem]
-  name=MapR Technologies
-  baseurl=http://package.mapr.com/releases/ecosystem-4.x/redhat
-  enabled=1
-  gpgcheck=0
-  protect=1"
+[maprecosystem]
+name=MapR Technologies
+baseurl=http://package.mapr.com/releases/ecosystem-4.x/redhat
+enabled=1
+gpgcheck=0
+protect=1"
 end

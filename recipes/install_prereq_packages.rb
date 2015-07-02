@@ -1,5 +1,7 @@
 log '\n=========== Start MapR install_mapr_prereqs.rb =============\n'
 
+include_recipe 'mapr_installation::selinux'
+
 package 'bash'
 package 'rpcbind'
 package 'dmidecode'

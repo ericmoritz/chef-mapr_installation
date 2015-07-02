@@ -3,6 +3,11 @@ mapr_installation CHANGELOG
 
 This file is used to list changes made in each version of the mapr_installation cookbook.
 
+0.2.7
+-----
+- [daniel washko] - adjusting configure.sh script to remove disk section and add user and group information within configure recipe.
+- [daniel washko] - Having selinux disabled in prereq recipe.
+
 0.2.6
 -----
 - [daniel washko] - fixing maprcli command in default recipe

@@ -1,5 +1,11 @@
 log '\n=========== Start MapR install_mapr_prereqs.rb =============\n'
 
+bash 'fix tmp permissions' do
+  code <<-EOH
+    chmod 1777 /tmp
+  EOH
+end
+
 include_recipe 'mapr_installation::selinux'
 
 package 'bash'

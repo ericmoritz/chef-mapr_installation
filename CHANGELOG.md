@@ -3,6 +3,10 @@ mapr_installation CHANGELOG
 
 This file is used to list changes made in each version of the mapr_installation cookbook.
 
+0.2.8
+-----
+- [daniel washko] - Have to fix /tmp permissions after new storage is attached.
+
 0.2.7
 -----
 - [daniel washko] - adjusting configure.sh script to remove disk section and add user and group information within configure recipe.

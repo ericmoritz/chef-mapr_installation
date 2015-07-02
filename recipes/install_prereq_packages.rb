@@ -1,5 +1,12 @@
 log '\n=========== Start MapR install_mapr_prereqs.rb =============\n'
 
+directory '/tmp' do
+  owner 'root'
+  group 'root'
+  mode '1777'
+  action :create
+end
+
 include_recipe 'mapr_installation::selinux'
 
 package 'bash'

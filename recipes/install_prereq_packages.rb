@@ -49,7 +49,7 @@ end
 ruby_block 'Set JAVA_HOME in /etc/profile' do
   block do
     file  = Chef::Util::FileEdit.new('/etc/profile')
-    file.insert_line_if_no_match('export JAVA_HOME=#{node[:java][:home]}', '\nexport JAVA_HOME=#{node[:java][:home]}')
+    file.insert_line_if_no_match("export JAVA_HOME=#{node['java']['home']}", "export JAVA_HOME=#{node['java']['home']}")
     file.insert_line_if_no_match('export EDITOR=vi', 'export EDITOR=vi')
     file.write_file
   end

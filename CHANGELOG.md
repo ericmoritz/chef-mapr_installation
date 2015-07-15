@@ -3,6 +3,10 @@ mapr_installation CHANGELOG
 
 This file is used to list changes made in each version of the mapr_installation cookbook.
 
+0.2.9
+-----
+- [daniel washko] - Fixing export of java_home to /etc/profile
+
 0.2.8
 -----
 - [daniel washko] - Have to fix /tmp permissions after new storage is attached.

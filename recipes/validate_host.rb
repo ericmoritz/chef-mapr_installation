@@ -21,7 +21,7 @@ ruby_block 'edit etc sysctl' do
     file.search_file_delete_line('net.ipv4.tcp_retries2')
     file.insert_line_if_no_match('net.ipv4.tcp_retries2', 'net.ipv4.tcp_retries2 = 5')
     file.search_file_delete_line('vm.overcommit_memory')
-    file.insert_line_if_no_match('vm.overcommit_memory', 'vm.overcommit_memory = 0 \n')
+    file.insert_line_if_no_match('vm.overcommit_memory', 'vm.overcommit_memory = 0')
     file.write_file
   end
 end
@@ -46,6 +46,10 @@ ruby_block 'Edit /etc/security/limits.d/90-nproc.conf' do
     file.insert_line_if_no_match('#End of', '#End of file')
     file.write_file
   end
+end
+
+execute "sysctl -p" do
+  command "sysctl -p"
 end
 
 file '/etc/yum.repos.d/maprtech.repo' do

@@ -19,6 +19,9 @@ config_command << "-N #{node['mapr']['clustername']}"
 config_command << '-u mapr -g mapr'
 config_command << '-no-autostart'
 config_command << '-on-prompt-cont y'
+if node['mapr']['isvm']
+  config_command << '--isvm'
+end
 config_command = config_command.join(' ')
 
 

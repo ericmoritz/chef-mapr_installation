@@ -10,6 +10,7 @@
 include_recipe 'mapr_installation::install_prereq_packages'
 include_recipe 'mapr_installation::iptables'
 include_recipe 'mapr_installation::clush'
+include_recipe 'mapr_installation::mapr_ssh_shared_key'
 include_recipe 'mapr_installation::user_mapr'
 
 include_recipe 'mapr_installation::user_root' if node['mapr']['manage_root'] == true
@@ -83,51 +84,20 @@ include_recipe 'mapr_installation::mapr_configure'
 include_recipe 'mapr_installation::mapr_disksetup'
 
 
-# Start Zookeeper service
+# Enable the zookeeper service
 if is_zk == 'yes'
-  include_recipe 'mapr_installation::mapr_start_zookeeper'
-else
-  execute 'sleep for zookeeper' do
-    command 'sleep 60'
+  service 'mapr-zookeeper' do
+    action [:enable]
   end
 end
 
-# Start CLDB service
-if is_cldb == 'yes'
-  include_recipe 'mapr_installation::mapr_start_warden'
-else
-  execute 'sleep for cldb' do
-    command 'sleep 120'
+# Enable the warden
+service 'mapr-warden' do
+  action [:enable]
+end
+
+if not node['mapr']['isvm']
+  execute "Wait for cluster to come up" do
+   command "/opt/mapr/server/scripts/wait-for-cluster.py #{node['mapr']['node_count']} #{node['mapr']['zk'].size}"
   end
-end
-
-include_recipe 'mapr_installation::mapr_start_warden' if is_cldb == 'no'
-
-warden_running = 'no'
-run_check = 'no'
-ruby_block 'Warden running?' do
-  block do
-    while warden_running == 'no'
-      run_check = Mixlib::ShellOut.new('/sbin/service mapr-warden status')
-      rc = /process/.match(run_check)
-      if rc.to_s == 'process'
-        warden_running = 'yes'
-      else
-        Mixlib::ShellOut.new('sleep 5')
-        print '\nSleeping for 5, waiting on warden to start...\n'
-      end
-    end
-  end
-end
-
-cldb_running = 'no'
-execute "CLDB up and running?" do
-  command "/opt/mapr/server/scripts/waitfor.py \"ServerID\" maprcli node cldbmaster"
-end
-
-# Get running warden count
-warden_running = '0'
-
-execute "All nodes up?" do
-  command "/opt/mapr/server/scripts/wait-for-cluster.py #{node['mapr']['node_count']}"
 end

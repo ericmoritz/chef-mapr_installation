@@ -41,5 +41,12 @@ default['mapr']['repo_url'] = 'http//package.mapr.com/releases'
 
 default['mapr']['node']['disks'] = '/dev/xvdf,/dev/xvdg'
 
+default['mapr']['clush']['url'] = 'https://github.com/downloads/cea-hpc/clustershell/clustershell-1.6.tar.gz'
+
+default['mapr']['shared_key']['public'] = nil
+default['mapr']['shared_key']['private'] = nil
+
+default['mapr']['isvm'] = false
+
 default['java']['version'] = 'java-1.7.0-openjdk-devel-1.7.0.79-2.5.5.3.el6_6.x86_64'
 default['java']['home'] = '/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.79.x86_64/'

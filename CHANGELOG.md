@@ -3,9 +3,9 @@ mapr_installation CHANGELOG
 
 This file is used to list changes made in each version of the mapr_installation cookbook.
 
-0.2.10
+0.3.0
 -----
-- [eric moritz] - Automated disksetup
+- [eric moritz] - deprecated the *_ips attributes, use DNS with the FQDNs
 
 
 0.2.9

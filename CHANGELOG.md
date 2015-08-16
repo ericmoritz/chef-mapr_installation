@@ -5,6 +5,10 @@ This file is used to list changes made in each version of the mapr_installation 
 
 0.3.0
 -----
+- [eric moritz] - added the ability to optionally reconfigure on chef reconverge
+
+0.3.0
+-----
 - [eric moritz] - deprecated the *_ips attributes, use DNS with the FQDNs
 
 

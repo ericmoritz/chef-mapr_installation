@@ -3,7 +3,7 @@ mapr_installation CHANGELOG
 
 This file is used to list changes made in each version of the mapr_installation cookbook.
 
-0.3.0
+0.3.1
 -----
 - [eric moritz] - added the ability to optionally reconfigure on chef reconverge
 

@@ -1,6 +1,5 @@
 log "\n=========== Start MapR mapr_configure.rb =============\n"
 
-
 def service_node(type)
   return node['mapr']["#{type}_ips"] ? node['mapr']["#{type}_ips"] : node['mapr']["#{type}"]
 end

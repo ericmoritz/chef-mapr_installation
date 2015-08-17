@@ -24,16 +24,15 @@ include_recipe 'ntp'
 include_recipe 'mapr_installation::mapr_base'
 include_recipe 'mapr_installation::mapr_nodemanager'
 
-remote_directory "/opt/mapr/server/scripts" do
-  source "scripts"
-  user "root"
-  group "root"
-  mode "755"
-  files_owner "root"
-  files_group "root"
-  files_mode "755"
+remote_directory '/opt/mapr/server/scripts' do
+  source 'scripts'
+  user 'root'
+  group 'root'
+  mode '755'
+  files_owner 'root'
+  files_group 'root'
+  files_mode '755'
 end
-
 
 is_zk = 'no'
 is_cldb = 'no'
@@ -82,7 +81,6 @@ include_recipe 'mapr_installation::mapr_setenv'
 include_recipe 'mapr_installation::mapr_configure'
 include_recipe 'mapr_installation::mapr_disksetup'
 
-
 # Start Zookeeper service
 if is_zk == 'yes'
   include_recipe 'mapr_installation::mapr_start_zookeeper'
@@ -120,14 +118,13 @@ ruby_block 'Warden running?' do
   end
 end
 
-cldb_running = 'no'
-execute "CLDB up and running?" do
-  command "/opt/mapr/server/scripts/waitfor.py \"ServerID\" maprcli node cldbmaster"
+execute 'CLDB up and running?' do
+  command '/opt/mapr/server/scripts/waitfor.py \'ServerID\' maprcli node cldbmaster'
 end
 
 # Get running warden count
 warden_running = '0'
 
-execute "All nodes up?" do
+execute 'All nodes up?' do
   command "/opt/mapr/server/scripts/wait-for-cluster.py #{node['mapr']['node_count']}"
 end

@@ -7,11 +7,9 @@ Vagrant.require_version '>= 1.5.0'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname = 'mapr_installation'
-  file_to_disk = "./node-1-disk.vdi"
+  file_to_disk = './node-1-disk.vdi'
 
-  
-
-  config.vm.provider "virtualbox" do | v |
+  config.vm.provider 'virtualbox' do | v |
     v.memory = 1024 * 4
 
     unless File.exist?(file_to_disk)
@@ -31,25 +29,25 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.box = 'chef/centos-6.6'
-  config.vm.network :private_network, ip: "10.1.1.10"
-  config.vm.hostname = "node-1"
+  config.vm.network :private_network, ip: '10.1.1.10'
+  config.vm.hostname = 'node-1'
   config.berkshelf.enabled = true
 
   config.vm.provision :chef_solo do |chef|
     chef.json = {
-      "java" => {
-        "version" => "java-1.8.0-openjdk-devel",
-        "home" => "/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.51-1.b16.el6_7.x86_64/"
+      'java' => {
+        'version' => 'java-1.8.0-openjdk-devel',
+        'home' => '/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.51-1.b16.el6_7.x86_64/'
       },
-      "mapr" => {
-        "cluster_node_ips" => ["10.1.1.10"],
-        "node_count" => '1',
-        "cluster_nodes" => ["node-1"],
-        "cldb" => ["node-1"],
-        "zk" => ["node-1"],
-        "rm" => ["node-1"],
-        "hs" => "node-1",
-        "ws" => ["node-1"]
+      'mapr' => {
+        'cluster_node_ips' => ['10.1.1.10'],
+        'node_count' => '1',
+        'cluster_nodes' => ['node-1'],
+        'cldb' => ['node-1'],
+        'zk' => ['node-1'],
+        'rm' => ['node-1'],
+        'hs' => 'node-1',
+        'ws' => ['node-1']
 
       }
     }

@@ -30,8 +30,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = 'chef/centos-6.6'
   config.vm.network :private_network, ip: '10.1.1.10'
-  config.vm.hostname = 'node-1'
+  config.vm.hostname = 'i-randomstring'
   config.berkshelf.enabled = true
+
+
+  config.vm.provision :shell, inline: "echo node-1 > /etc/hostalias"
+  config.vm.provision :shell, inline: "echo 10.1.1.10 node-1 >> /etc/hosts"
 
   config.vm.provision :chef_solo do |chef|
     chef.json = {

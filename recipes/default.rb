@@ -7,6 +7,7 @@
 #
 
 # Parameter settings, user definitions, etc
+include_recipe 'mapr_installation::mapr_hostalias'
 include_recipe 'mapr_installation::install_prereq_packages'
 include_recipe 'mapr_installation::iptables'
 include_recipe 'mapr_installation::clush'
@@ -38,39 +39,44 @@ is_zk = 'no'
 is_cldb = 'no'
 
 # Install CLDB service from attributes
+log "CLDB on node: #{node['hostalias']}?"
 node['mapr']['cldb'].each do |cldb|
-  next unless node['fqdn'] == cldb
-  print "\nWill install CLDB on node: #{node['fqdn']}\n"
+  next unless node['hostalias'] == cldb
+  log "Will install CLDB on node: #{node['hostalias']}"
   is_cldb = 'yes'
   include_recipe 'mapr_installation::mapr_cldb'
 end
 
 # Install Zookeeper service from attributes
+log "Zookeeper on node: #{node['hostalias']}?"
 node['mapr']['zk'].each do |zk|
-  next unless node['fqdn'] == zk
-  print "\nWill install Zookeeper on node: #{node['fqdn']}\n"
+  next unless node['hostalias'] == zk
+  log "Will install Zookeeper on node: #{node['hostalias']}"
   is_zk = 'yes'
   include_recipe 'mapr_installation::mapr_zookeeper'
 end
 
 # Install Resource Manager service from attributes
+log "RM on node: #{node['hostalias']}?"
 node['mapr']['rm'].each do |rm|
-  if node['fqdn'] == rm
-    print "\nWill install Resource Manager on node: #{node['fqdn']}\n"
+  if node['hostalias'] == rm
+    log "Will install Resource Manager on node: #{node['hostalias']}"
     include_recipe 'mapr_installation::mapr_resourcemanager'
   end
 end
 
 # Install YARN History Server service from attributes
-if node['fqdn'] == node['mapr']['hs']
-  print "\nWill install Yarn History Server  on node: #{node['fqdn']}\n"
+log "HS on node: #{node['hostalias']}?"
+if node['hostalias'] == node['mapr']['hs']
+  log "Will install Yarn History Server  on node: #{node['hostalias']}"
   include_recipe 'mapr_installation::mapr_historyserver'
 end
 
 # Install MapR Webserver service from attributes
+log "MCS on node: #{node['hostalias']}?"
 node['mapr']['ws'].each do |ws|
-  if node['fqdn'] == ws
-    print "\nWill install MapR Webserver on node: #{node['fqdn']}\n"
+  if node['hostalias'] == ws
+    log "Will install MapR Webserver on node: #{node['hostalias']}"
     include_recipe 'mapr_installation::mapr_webserver'
   end
 end

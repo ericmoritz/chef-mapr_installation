@@ -128,9 +128,3 @@ execute 'CLDB up and running?' do
   command '/opt/mapr/server/scripts/waitfor.py \'ServerID\' maprcli node cldbmaster'
 end
 
-# Get running warden count
-warden_running = '0'
-
-execute 'All nodes up?' do
-  command "/opt/mapr/server/scripts/wait-for-cluster.py #{node['mapr']['node_count']}"
-end

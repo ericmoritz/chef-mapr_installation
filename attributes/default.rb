@@ -7,13 +7,7 @@ default['mapr']['manage_root'] = true
 default['mapr']['password'] = '$1$xNo/jY/u$LWqlJIzEzFqbmZv6aemsR1'
 default['root']['password'] = '$1$ck3SLdAA$SO8yFTYXpEFAt07ld3d8d/'
 default['ntp']['servers'] = ["'0.pool.ntp.org', '1.pool.ntp.org'"]
-
-# All MapR nodes in this cluster
-default['mapr']['cluster_nodes'] = []
-default['mapr']['cluster_node_ips'] = []
-
-# Enter total number of nodes in MapR cluster here
-default['mapr']['node_count'] = 6
+default['mapr']['clush']['url'] = 'https://github.com/downloads/cea-hpc/clustershell/clustershell-1.6-1.el6.noarch.rpm'
 
 # Define MapR roles for configure.sh here
 default['mapr']['cldb'] = []
@@ -26,6 +20,7 @@ default['mapr']['hs'] = nil
 default['mapr']['hs_ips'] = nil
 default['mapr']['ws'] = []
 default['mapr']['ws_ips'] = []
+
 
 default['se_status'] = 'Disabled'
 

@@ -36,6 +36,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :shell, inline: "echo node-1 > /etc/hostalias"
   config.vm.provision :shell, inline: "echo 10.1.1.10 node-1 >> /etc/hosts"
+  config.vm.provision :shell, inline: %(
+mkdir -p /etc/clustershell/
+cat << EOF > /etc/clustershell/groups
+all: node-1
+EOF
+)
 
   config.vm.provision :chef_solo do |chef|
     chef.json = {
@@ -44,15 +50,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         'home' => '/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.51-1.b16.el6_7.x86_64/'
       },
       'mapr' => {
-        'cluster_node_ips' => ['10.1.1.10'],
-        'node_count' => '1',
-        'cluster_nodes' => ['node-1'],
         'cldb' => ['node-1'],
         'zk' => ['node-1'],
         'rm' => ['node-1'],
         'hs' => 'node-1',
         'ws' => ['node-1']
-
       }
     }
 

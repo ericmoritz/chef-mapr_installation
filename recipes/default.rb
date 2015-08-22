@@ -24,6 +24,8 @@ include_recipe 'ntp'
 # All cluster nodes need the following:
 include_recipe 'mapr_installation::mapr_base'
 include_recipe 'mapr_installation::mapr_nodemanager'
+package 'mapr-pig'
+execute 'easy_install mrjob'
 
 remote_directory '/opt/mapr/server/scripts' do
   source 'scripts'
@@ -85,6 +87,7 @@ end
 # NOTE:  This will NOT automatically bring up the cluster.  That is done below...
 include_recipe 'mapr_installation::mapr_setenv'
 include_recipe 'mapr_installation::mapr_configure'
+
 include_recipe 'mapr_installation::mapr_disksetup'
 
 # Start Zookeeper service
@@ -96,35 +99,20 @@ else
   end
 end
 
-# Start CLDB service
-if is_cldb == 'yes'
-  include_recipe 'mapr_installation::mapr_start_warden'
-else
-  execute 'sleep for cldb' do
-    command 'sleep 120'
-  end
-end
+# Start CLDB service if this is a cldb node
+include_recipe 'mapr_installation::mapr_start_warden' if is_cldb == 'yes'
 
-include_recipe 'mapr_installation::mapr_start_warden' if is_cldb == 'no'
-
-warden_running = 'no'
-run_check = 'no'
-ruby_block 'Warden running?' do
-  block do
-    while warden_running == 'no'
-      run_check = Mixlib::ShellOut.new('/sbin/service mapr-warden status')
-      rc = /process/.match(run_check)
-      if rc.to_s == 'process'
-        warden_running = 'yes'
-      else
-        Mixlib::ShellOut.new('sleep 5')
-        print '\nSleeping for 5, waiting on warden to start...\n'
-      end
-    end
-  end
-end
-
+# Wait for a CLDB master
 execute 'CLDB up and running?' do
   command '/opt/mapr/server/scripts/waitfor.py \'ServerID\' maprcli node cldbmaster'
+end
+
+# If we're not a CLDB node, start the warden now that the cldbmaster
+# is up
+include_recipe 'mapr_installation::mapr_start_warden' if is_cldb == 'no'
+
+# Wait for the warden to come up before we continue with ecosystem components
+execute 'Warden running?' do
+  command '/opt/mapr/server/scripts/waitfor.py \'process\' service mapr-warden status'
 end
 

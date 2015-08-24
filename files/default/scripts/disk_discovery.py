@@ -16,9 +16,10 @@ def guard_errors(args):
     proc = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (output, errors) = proc.communicate()
     if proc.returncode:
-        log.error("Error running {args}: \n{output}".format(
+        log.error("Error running {args}:\nstdout:\n{output}\nstderr:\n{errors}".format(
             args=args,
-            output=output
+            output=output,
+            errors=errors
         ))
         sys.exit(1)
     else:

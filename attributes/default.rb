@@ -20,6 +20,7 @@ default['mapr']['hs'] = nil
 default['mapr']['hs_ips'] = nil
 default['mapr']['ws'] = []
 default['mapr']['ws_ips'] = []
+default['mapr']['nfs'] = '*' # Array | String
 
 default['se_status'] = 'Disabled'
 

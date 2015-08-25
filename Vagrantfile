@@ -33,9 +33,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname = 'i-randomstring'
   config.berkshelf.enabled = true
 
-
-  config.vm.provision :shell, inline: "echo node-1 > /etc/hostalias"
-  config.vm.provision :shell, inline: "echo 10.1.1.10 node-1 >> /etc/hosts"
+  config.vm.provision :shell, inline: 'echo node-1 > /etc/hostalias'
+  config.vm.provision :shell, inline: 'echo 10.1.1.10 node-1 >> /etc/hosts'
   config.vm.provision :shell, inline: %(
 mkdir -p /etc/clustershell/
 cat << EOF > /etc/clustershell/groups

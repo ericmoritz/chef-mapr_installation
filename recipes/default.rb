@@ -115,4 +115,3 @@ include_recipe 'mapr_installation::mapr_start_warden' if is_cldb == 'no'
 execute 'Warden running?' do
   command '/opt/mapr/server/scripts/waitfor.py \'process\' service mapr-warden status'
 end
-

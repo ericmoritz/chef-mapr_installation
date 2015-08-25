@@ -15,7 +15,7 @@ directory '/mapr' do
   group 'root'
   mode '0755'
   action :create
-  not_if { File.exist?("/mapr") }
+  not_if { File.exist?('/mapr') }
 end
 
 # Create a mapr_fstab file so mapr-nfsserver can automount /mapr

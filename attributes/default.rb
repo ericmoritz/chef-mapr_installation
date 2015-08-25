@@ -21,7 +21,6 @@ default['mapr']['hs_ips'] = nil
 default['mapr']['ws'] = []
 default['mapr']['ws_ips'] = []
 
-
 default['se_status'] = 'Disabled'
 
 default['mapr']['home'] = '/opt/mapr'

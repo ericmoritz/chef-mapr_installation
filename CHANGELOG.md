@@ -7,6 +7,9 @@ This file is used to list changes made in each version of the mapr_installation 
 -----
 - [eric moritz] - deprecated the *_ips attributes, use DNS with the FQDNs
 
+0.2.10
+-----
+- [eric moritz] - Enabled HTTP for MCS
 
 0.2.9
 -----

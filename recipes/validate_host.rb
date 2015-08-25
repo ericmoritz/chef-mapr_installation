@@ -13,7 +13,7 @@ end
 
 ruby_block 'edit etc sysctl' do
   block do
-    file  = Chef::Util::FileEdit.new('/etc/sysctl.conf')
+    file = Chef::Util::FileEdit.new('/etc/sysctl.conf')
     file.search_file_delete_line('#MapR Values')
     file.insert_line_if_no_match('#MapR\ Values', '\n#MapR Values')
     file.search_file_delete_line('vm.swappiness')
@@ -28,7 +28,7 @@ end
 
 ruby_block 'Edit /etc/security/limits.conf' do
   block do
-    file  = Chef::Util::FileEdit.new('/etc/security/limits.conf')
+    file = Chef::Util::FileEdit.new('/etc/security/limits.conf')
     file.search_file_delete_line('mapr')
     file.search_file_delete_line('#End of')
     file.insert_line_if_no_match('mapr', 'mapr	-	nofile	64000')
@@ -39,7 +39,7 @@ end
 
 ruby_block 'Edit /etc/security/limits.d/90-nproc.conf' do
   block do
-    file  = Chef::Util::FileEdit.new('/etc/security/limits.d/90-nproc.conf')
+    file = Chef::Util::FileEdit.new('/etc/security/limits.d/90-nproc.conf')
     file.search_file_delete_line('mapr')
     file.search_file_delete_line('#End of')
     file.insert_line_if_no_match('mapr', 'mapr	-	nproc	64000')

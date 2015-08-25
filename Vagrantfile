@@ -9,7 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname = 'mapr_installation'
   file_to_disk = './node-1-disk.vdi'
 
-  config.vm.provider 'virtualbox' do | v |
+  config.vm.provider 'virtualbox' do |v|
     v.memory = 1024 * 4
 
     unless File.exist?(file_to_disk)

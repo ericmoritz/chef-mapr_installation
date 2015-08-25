@@ -3,7 +3,7 @@ log "\n=========== Start MapR mapr_setenv.rb =============\n"
 # Set JAVA_HOME for MapR
 ruby_block 'Edit /opt/mapr/conf/env.sh' do
   block do
-    file  = Chef::Util::FileEdit.new('/opt/mapr/conf/env.sh')
+    file = Chef::Util::FileEdit.new('/opt/mapr/conf/env.sh')
     file.search_file_replace_line('#export JAVA_HOME=', "export JAVA_HOME=#{node['java']['home']}")
     file.write_file
   end

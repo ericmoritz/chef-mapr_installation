@@ -5,7 +5,7 @@ is_nfs = (
   # If want to install NFS on all nodes
   node['mapr']['nfs'] == '*' || (
     node['mapr']['nfs'].is_a?(Array) &&
-    node['mapr']['nfs'].contain?(node['hostalias'])
+    node['mapr']['nfs'].include?(node['hostalias'])
   )
 )
 

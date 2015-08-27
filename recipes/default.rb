@@ -20,7 +20,6 @@ include_recipe 'ntp'
 include_recipe 'mapr_installation::mapr_base'
 include_recipe 'mapr_installation::mapr_nodemanager'
 package 'mapr-pig'
-execute 'easy_install mrjob'
 
 remote_directory '/opt/mapr/server/scripts' do
   source 'scripts'

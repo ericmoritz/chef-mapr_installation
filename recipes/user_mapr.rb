@@ -20,6 +20,7 @@ end
 
 user node['mapr']['user'] do
   uid user_data['uid']
+  gid user_data['gid']
   password user_data['password']
   action :modify
 end

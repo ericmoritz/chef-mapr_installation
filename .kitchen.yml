@@ -18,17 +18,11 @@ platforms:
 suites:
   - name: default
     data_bags_path: test/integration/data_bags
+    roles_path: roles
     run_list:
-      - recipe[users]
-      - recipe[ssh-keys]
-      - recipe[mapr_installation::default]
+      - role[mapr-node]
     attributes:
       ssh_keys_use_encrypted_data_bag: false
-      users:
-        singleusers: ['mapr']
-      java:
-        version: 'java-1.8.0-openjdk-devel'
-        home: '/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.51-1.b16.el6_7.x86_64/'
       mapr:
         cldb: ['node-1']
         zk: ['node-1']

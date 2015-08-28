@@ -6,5 +6,8 @@ description      'Installs/Configures mapr_installation'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.3.0'
 
+depends 'users'
+depends 'sudo'
+depends 'ssh-keys'
 depends 'selinux'
 depends 'ntp'

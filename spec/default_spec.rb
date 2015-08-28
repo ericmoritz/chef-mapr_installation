@@ -7,6 +7,15 @@ describe 'mapr_installation::default' do
   let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'centos', version: '6.5').converge(described_recipe) }
   before do
     stub_command("cat /etc/rc.local | grep 'never > /sys/kernel/mm/transparent_hugepage/enabled'").and_return(true)  
+
+    stub_data_bag_item('users', 'mapr').and_return(
+      {
+        'id' => 'mapr',
+        'uid' => 5000,
+        'gid' => 5000,
+        'password' => 'yay!'
+      }
+    )
   end
 
   it 'includes recipe mapr_installation::default' do

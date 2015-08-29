@@ -1,9 +1,19 @@
 # Mapr module
 module Mapr
   ### Publics
+  def self.hostalias(node)
+    if node['hostalias']
+      node['hostalias']
+    elsif File.exist?('/etc/hostalias')
+      File.read('/etc/hostalias').strip
+    else
+      node['fqdn']
+    end
+  end
+
   def self.role?(node, role_name)
     # Returns True if this node should have that role
-    fqdn = node['hostalias']
+    fqdn = hostalias(node)
     role_fqdns = role_fqdns(node, role_name)
     role_fqdns.include?(fqdn)
   end
@@ -14,7 +24,7 @@ module Mapr
     if role_item.is_a?(Array)
       role_item
     elsif role_item == '*'
-      [node['hostalias']]
+      [hostalias(node)]
     elsif role_item.is_a?(String)
       [role_item]
     else
@@ -23,6 +33,7 @@ module Mapr
   end
 
   ### Privates
+
   def self._role_item(node, role_name)
     if node['mapr'] && node['mapr'][role_name]
       node['mapr'][role_name]

@@ -1,4 +1,3 @@
-include_recipe 'mapr_installation::mapr_hostalias'
 include_recipe 'mapr_installation::install_prereq_packages'
 include_recipe 'mapr_installation::iptables'
 include_recipe 'mapr_installation::clush'

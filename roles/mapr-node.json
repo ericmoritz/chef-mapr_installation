@@ -28,7 +28,7 @@
     },
     "authorization": {
       "sudo": {
-        "users": ["mapr", "vagrant"],
+        "users": ["mapr", "vagrant", "cloud-user"],
         "passwordless": true
       }
     }

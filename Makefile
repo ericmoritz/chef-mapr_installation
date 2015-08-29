@@ -1,7 +1,11 @@
-.PHONY: test integration-test
+.PHONY: test integration-test rubocop rspec
 
-test:
+test: rubocop rspec
+
+rubocop:
 	rubocop
+
+rspec:
 	chef exec rspec
 
 test-integration:

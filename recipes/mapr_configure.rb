@@ -1,23 +1,16 @@
 log "\n=========== Start MapR mapr_configure.rb =============\n"
 
-def service_node(type)
-  node['mapr']["#{type}_ips"] ? node['mapr']["#{type}_ips"] : node['mapr']["#{type}"]
+def service_nodes(role_name)
+  Mapr.mapr_role_fqdns(node, role_name)
 end
 
-def service_nodes(type)
-  # use the _ips addresses over the FQDN addresses for backwards
-  # compatibility
-  ips = node['mapr']["#{type}_ips"]
-  hostnames = node['mapr']["#{type}"]
-
-  if ips.empty?
-    log "#{type} fqdn #{hostnames}"
-    nodes = hostnames
+def service_node(role_name)
+  x = service_nodes(role_name)
+  if !x.empty?
+    x[0]
   else
-    log "#{type} ips"
-    nodes = ips
+    ''
   end
-  nodes.reject(&:empty?).sort
 end
 
 cldb_nodes = service_nodes('cldb')

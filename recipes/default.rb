@@ -31,50 +31,44 @@ remote_directory '/opt/mapr/server/scripts' do
   files_mode '755'
 end
 
-is_zk = 'no'
-is_cldb = 'no'
+def role?(role_name)
+  Mapr.role? node, role_name
+end
+is_zk = role? 'zk'
+is_cldb = role? 'cldb'
 
 # Install CLDB service from attributes
-log "CLDB on node: #{node['hostalias']}?"
-node['mapr']['cldb'].each do |cldb|
-  next unless node['hostalias'] == cldb
+if is_cldb
   log "Will install CLDB on node: #{node['hostalias']}"
-  is_cldb = 'yes'
   include_recipe 'mapr_installation::mapr_cldb'
 end
 
 # Install Zookeeper service from attributes
 log "Zookeeper on node: #{node['hostalias']}?"
-node['mapr']['zk'].each do |zk|
-  next unless node['hostalias'] == zk
+if is_zk
   log "Will install Zookeeper on node: #{node['hostalias']}"
-  is_zk = 'yes'
   include_recipe 'mapr_installation::mapr_zookeeper'
 end
 
 # Install Resource Manager service from attributes
 log "RM on node: #{node['hostalias']}?"
-node['mapr']['rm'].each do |rm|
-  if node['hostalias'] == rm
-    log "Will install Resource Manager on node: #{node['hostalias']}"
-    include_recipe 'mapr_installation::mapr_resourcemanager'
-  end
+if role? 'rm'
+  log "Will install Resource Manager on node: #{node['hostalias']}"
+  include_recipe 'mapr_installation::mapr_resourcemanager'
 end
 
 # Install YARN History Server service from attributes
 log "HS on node: #{node['hostalias']}?"
-if node['hostalias'] == node['mapr']['hs']
+if role? 'hs'
   log "Will install Yarn History Server  on node: #{node['hostalias']}"
   include_recipe 'mapr_installation::mapr_historyserver'
 end
 
 # Install MapR Webserver service from attributes
 log "MCS on node: #{node['hostalias']}?"
-node['mapr']['ws'].each do |ws|
-  if node['hostalias'] == ws
-    log "Will install MapR Webserver on node: #{node['hostalias']}"
-    include_recipe 'mapr_installation::mapr_webserver'
-  end
+if role? 'ws'
+  log "Will install MapR Webserver on node: #{node['hostalias']}"
+  include_recipe 'mapr_installation::mapr_webserver'
 end
 
 # Set up environment variables, nfsserver automount, and run configure.sh to configure cluster.
@@ -85,16 +79,13 @@ include_recipe 'mapr_installation::mapr_configure'
 include_recipe 'mapr_installation::mapr_disksetup'
 
 # Start Zookeeper service
-if is_zk == 'yes'
-  include_recipe 'mapr_installation::mapr_start_zookeeper'
-else
-  execute 'sleep for zookeeper' do
-    command 'sleep 60'
-  end
+include_recipe 'mapr_installation::mapr_start_zookeeper' if is_zk
+execute 'sleep for zookeeper' do
+  command 'sleep 60'
 end
 
 # Start CLDB service if this is a cldb node
-include_recipe 'mapr_installation::mapr_start_warden' if is_cldb == 'yes'
+include_recipe 'mapr_installation::mapr_start_warden' if is_cldb
 
 # Wait for a CLDB master
 execute 'CLDB up and running?' do
@@ -103,7 +94,7 @@ end
 
 # If we're not a CLDB node, start the warden now that the cldbmaster
 # is up
-include_recipe 'mapr_installation::mapr_start_warden' if is_cldb == 'no'
+include_recipe 'mapr_installation::mapr_start_warden' unless is_cldb
 
 # Wait for the warden to come up before we continue with ecosystem components
 execute 'Warden running?' do

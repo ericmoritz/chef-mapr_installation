@@ -31,20 +31,3 @@ suites:
         ws: ['node-1']
       ssh_keys:
         mapr: ['mapr']
-  - name: simple_nodes
-    data_bags_path: test/integration/data_bags
-    roles_path: roles
-    run_list:
-      - role[mapr-node]
-    attributes:
-      ssh_keys_use_encrypted_data_bag: false
-      mapr:
-        nodes:
-          node-1:
-            - "cldb"
-            - "zk"
-            - "rm"
-            - "hs"
-            - "ws"
-      ssh_keys:
-        mapr: ['mapr']

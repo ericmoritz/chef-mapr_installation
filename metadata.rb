@@ -8,4 +8,3 @@ version          '0.3.0'
 
 depends 'selinux', '0.8.1'
 depends 'ntp', '1.8.6'
-

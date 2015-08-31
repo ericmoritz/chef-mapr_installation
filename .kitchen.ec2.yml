@@ -36,11 +36,11 @@ suites:
     attributes:
       ssh_keys_use_encrypted_data_bag: false
       mapr:
-        cldb: ['node-1']
-        zk: ['node-1']
-        rm: ['node-1']
-        hs: 'node-1'
-        ws: ['node-1']
+        cldb: '*'
+        zk: '*'
+        rm: '*'
+        hs: '*'
+        ws: '*'
       ssh_keys:
         mapr: ['mapr']
 

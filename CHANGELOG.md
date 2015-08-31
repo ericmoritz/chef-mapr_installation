@@ -6,6 +6,11 @@ This file is used to list changes made in each version of the mapr_installation 
 0.3.0
 -----
 - [eric moritz] - deprecated the *_ips attributes, use DNS with the FQDNs
+- [eric moritz] - added automatic disk discovery
+- [eric moritz] - changed zk and CLDB sleeps to service up detection
+- [eric moritz] - added testing
+- [eric moritz] - utilized the standard users, sudo, ssh-keys cookbooks
+- [eric moritz] - abstracted the service/node assignment code
 
 0.2.10
 -----

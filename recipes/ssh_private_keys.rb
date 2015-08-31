@@ -32,14 +32,15 @@ end
   private_keys = _io_data_bag_user_private_keys(username)
   home = user_data['dir']
   private_key_files = user_to_private_keys(home, private_keys)
-  if private_key_files
-    ## Create the user's .ssh directory
-    directory "#{home}/.ssh" do
-      owner user_data['uid']
-      group user_data['gid']
-      mode 0700
-      recursive true
-    end
+
+  next unless private_key_files
+
+  ## Create the user's .ssh directory
+  directory "#{home}/.ssh" do
+    owner user_data['uid']
+    group user_data['gid']
+    mode 0700
+    recursive true
   end
 
   ## Create each private key files

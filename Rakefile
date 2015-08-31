@@ -59,3 +59,5 @@ task travis: ['style', 'spec', 'integration:cloud']
 task default: ['style', 'spec', 'integration:vagrant']
 
 task test: ['style', 'spec']
+
+task ec2: ['style', 'spec', 'integration:ec2']

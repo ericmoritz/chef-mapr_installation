@@ -1,33 +1,26 @@
 log "\n=========== Start MapR user_mapr.rb =============\n"
 
+# Update the mapr user's uid,gid, and passwd. This is something the
+# chef-users cookbook doesn't support currently
+db_item = data_bag_item('users', node['mapr']['user']) || {}
+user_data = {}
+['gid', 'uid', 'password'].each do |key|
+  if db_item[key]
+    user_data[key] = db_item[key]
+  else
+    log "node['mapr']['#{key}'] is deprecated, use #{key} in the users/mapr databag"
+    user_data[key] = node['mapr'][key]
+  end
+end
+
 group node['mapr']['group'] do
-  gid node['mapr']['gid']
-end
-
-user node['mapr']['user'] do
-  uid node['mapr']['uid']
-  gid node['mapr']['gid']
-  shell '/bin/bash'
-  home "/home/#{node['mapr']['user']}"
-end
-
-user 'setting mapr password' do
-  username node['mapr']['user']
-  password node['mapr']['password']
+  gid user_data['gid']
   action :modify
 end
 
-directory "/home/#{node['mapr']['user']}" do
-  owner node['mapr']['user']
-  group node['mapr']['group']
-  mode 0700
-end
-
-ruby_block 'Add mapr to /etc/sudoers' do
-  block do
-    file = Chef::Util::FileEdit.new('/etc/sudoers')
-    file.insert_line_after_match('root    ALL=(ALL)       ALL', 'mapr	ALL=(ALL) 	ALL')
-    file.insert_line_if_no_match('mapr      ALL=(ALL)       ALL', 'mapr      ALL=(ALL)       ALL')
-    file.write_file
-  end
+user node['mapr']['user'] do
+  uid user_data['uid']
+  gid user_data['gid']
+  password user_data['password']
+  action :modify
 end

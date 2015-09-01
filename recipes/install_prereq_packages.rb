@@ -36,6 +36,7 @@ package 'gcc'
 package 'patch'
 package 'dstat'
 package 'lsof'
+package 'python-setuptools'
 
 java_version = node['java']['version']
 

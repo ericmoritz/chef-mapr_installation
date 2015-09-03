@@ -25,7 +25,7 @@ config_command << "-Z #{zk_nodes.join(',')}" unless zk_nodes.empty?
 config_command << "-RM #{rm_nodes.join(',')}" unless rm_nodes.empty?
 config_command << "-HS #{hs_node}"
 config_command << "-N #{node['mapr']['clustername']}"
-config_command << '-u mapr -g mapr'
+config_command << "-u #{node['mapr']['user']} -g #{node['mapr']['group']}"
 config_command << '-no-autostart'
 config_command << '-on-prompt-cont y'
 config_command = config_command.join(' ')

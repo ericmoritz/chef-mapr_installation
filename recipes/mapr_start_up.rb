@@ -11,7 +11,7 @@ include_recipe 'mapr_installation::mapr_start_zookeeper' if role? 'zk'
 
 zk_nodes = nodes 'zk'
 mode_pat = if zk_nodes.length > 1
-             'Mode: (leader|follower)'
+             'Mode: leader'
            else
              'Mode: standalone'
            end
@@ -19,8 +19,7 @@ execute 'Wait for zk up?' do
   command \
     '/opt/mapr/server/scripts/waitfor.py' \
     " '#{mode_pat}'" \
-    ' bash -c' \
-    " 'echo srvr | nc #{zk_nodes[0]} 5181'"
+    " /opt/mapr/server/scripts/zk-status.sh #{zk_nodes.join(' ')}"
   timeout 1800
 end
 

@@ -1,3 +1,8 @@
+# ensure that the hostalias file is on the system
+file '/etc/hostalias' do
+  content Mapr.hostalias(node)
+end
+
 include_recipe 'mapr_installation::install_prereq_packages'
 include_recipe 'mapr_installation::iptables'
 include_recipe 'mapr_installation::clush'

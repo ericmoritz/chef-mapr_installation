@@ -20,7 +20,7 @@ execute 'Wait for zk up?' do
     '/opt/mapr/server/scripts/waitfor.py' \
     " '#{mode_pat}'" \
     " /opt/mapr/server/scripts/zk-status.sh #{zk_nodes.join(' ')}"
-  timeout 1800
+  timeout 7200
 end
 
 # Start CLDB service if this is a cldb node
@@ -29,7 +29,7 @@ include_recipe 'mapr_installation::mapr_start_warden' if role? 'cldb'
 # Wait for a CLDB master
 execute 'CLDB up and running?' do
   command '/opt/mapr/server/scripts/waitfor.py \'ServerID\' maprcli node cldbmaster'
-  timeout 1800
+  timeout 7200
 end
 
 # If we're not a CLDB node, start the warden now that the cldbmaster

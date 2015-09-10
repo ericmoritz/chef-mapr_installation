@@ -15,7 +15,7 @@ ruby_block 'Edit /opt/mapr/conf/env.sh' do
   end
 end
 
-# Fix #!/bin/sh -> #!/bin/bash 
+# Fix #!/bin/sh -> #!/bin/bash
 ruby_block '"#!/bin/sh" -> "#!/bin/bash"' do
   block do
     Dir.glob('/opt/mapr/*/*/bin/*.sh').each do |fn|
@@ -25,7 +25,6 @@ ruby_block '"#!/bin/sh" -> "#!/bin/bash"' do
     end
   end
 end
-
 
 # Create /mapr...maybe not the most efficient way to do this...
 directory '/mapr' do

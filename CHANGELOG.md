@@ -3,6 +3,10 @@ mapr_installation CHANGELOG
 
 This file is used to list changes made in each version of the mapr_installation cookbook.
 
+0.3.2
+-----
+- [eric moritz] - DL-221 fixed a deadlock issue with the zk wait
+
 0.3.1
 -----
 - [eric moritz] - DL-252 added version numbers to packages

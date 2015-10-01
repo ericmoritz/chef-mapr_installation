@@ -17,7 +17,7 @@ default['mapr']['ws'] = []
 
 default['mapr']['home'] = '/opt/mapr'
 default['mapr']['clustername'] = 'my_cluster'
-default['mapr']['version'] = '4.0.2'
+default['mapr']['version'] = '4.1.0'
 default['mapr']['repo_url'] = 'http//package.mapr.com/releases'
 
 default['java']['version'] = 'java-1.7.0-openjdk-devel-1.7.0.79-2.5.5.3.el6_6.x86_64'

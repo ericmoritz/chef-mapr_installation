@@ -18,6 +18,9 @@ zk_nodes = service_nodes('zk')
 rm_nodes = service_nodes('rm')
 hs_node = service_node('hs')
 
+# Remove yarn-site.xml because we want configure.sh to regenerate it
+execute 'rm -f /opt/mapr/hadoop/hadoop-*/etc/hadoop/yarn-site.xml'
+
 config_command = []
 config_command << "#{node['mapr']['home']}/server/configure.sh"
 config_command << "-C #{cldb_nodes.join(',')}" unless cldb_nodes.empty?
@@ -33,4 +36,23 @@ config_command = config_command.join(' ')
 # Run configure.sh to configure the nodes, do NOT bring the cluster up
 execute 'Run configure.sh to configure cluster' do
   command config_command
+end
+
+## Alter yarn-site.xml
+ruby_block 'Configure yarn-site.xml' do
+  block do
+    Dir.glob('/opt/mapr/hadoop/hadoop-*/etc/hadoop/yarn-site.xml').each do |fn|
+      file = Chef::Util::FileEdit.new(fn)
+      file.insert_line_after_match(
+        '<!-- :::CAUTION::: DO NOT EDIT ANYTHING ON OR ABOVE THIS LINE -->',
+        <<-EOF
+  <property>
+    <name>yarn.nodemanager.hostname</name>
+    <value>#{Mapr.hostalias(node)}</value>
+  </property>
+EOF
+      )
+      file.write_file
+    end
+  end
 end

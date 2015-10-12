@@ -47,9 +47,18 @@ ruby_block 'Configure yarn-site.xml' do
         '<!-- :::CAUTION::: DO NOT EDIT ANYTHING ON OR ABOVE THIS LINE -->',
         <<-EOF
   <property>
-    <name>yarn.nodemanager.hostname</name>
-    <value>#{Mapr.hostalias(node)}</value>
+    <name>yarn.nodemanager.resource.cpu-vcores</name>
+    <value>8</value>
   </property>
+  <property>
+    <name>yarn.nodemanager.resource.memory-mb</name>
+    <value>150000</value>
+  </property>
+  <property>
+    <name>yarn.log-aggregation-enable</name>
+    <value>true</value>
+  </property>
+
 EOF
       )
       file.write_file

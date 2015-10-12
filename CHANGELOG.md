@@ -3,6 +3,11 @@ mapr_installation CHANGELOG
 
 This file is used to list changes made in each version of the mapr_installation cookbook.
 
+
+0.3.8
+-----
+- [hari rajaram] - DL-304 yarn configuration changes for memory,cores,logs
+
 0.3.7
 -----
 - [eric moritz] - DL-186 hardcoded the namenode hostname

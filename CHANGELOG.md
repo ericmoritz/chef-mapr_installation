@@ -3,7 +3,7 @@ mapr_installation CHANGELOG
 
 This file is used to list changes made in each version of the mapr_installation cookbook.
 
-0.3.7
+0.3.9
 -----
 - [eric moritz] - DL-60 integrated gdp-base-linux
 

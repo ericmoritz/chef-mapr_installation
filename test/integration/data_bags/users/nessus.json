@@ -1,0 +1,7 @@
+{
+  "id": "nessus",
+  "team": "security",
+  "ssh_keys": "derp_key",
+  "administrator": "true",
+  "group": "security"
+}

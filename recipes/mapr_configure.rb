@@ -14,8 +14,8 @@ def service_node(role_name)
 end
 
 def render_config
-  str = ""
-  hash=node['mapr']['config']['yarn-site.xml']
+  str = ''
+  hash = node['mapr']['config']['yarn-site.xml']
   hash.each do |key, value|
     str.concat("<property>\n")
     str.concat("\t<name>""#{key}""</name>\n")
@@ -53,7 +53,7 @@ end
 
 
 ## Alter yarn-site.xml
-yarnconf=render_config
+yarnconf = render_config
 ruby_block 'Configure yarn-site.xml' do
   block do
     Dir.glob('/opt/mapr/hadoop/hadoop-*/etc/hadoop/yarn-site.xml').each do |fn|

@@ -26,3 +26,7 @@ default['java']['home'] = '/usr/lib/jvm/java-1.7.0'
 default['mapr']['versions'] = {
   'pig' => '0.14.201509021826-1'
 }
+
+default['mapr']['config']['yarn-site.xml'] = { 'yarn.nodemanager.resource.cpu-vcores' => '8', 'yarn.nodemanager.resource.memory-mb' => '25000',
+                                               'yarn.log-aggregation-enable' => 'true', 'yarn.scheduler.maximum-allocation-mb' => '22000'
+}

@@ -13,6 +13,17 @@ def service_node(role_name)
   end
 end
 
+def render_config
+  yarnconfig = "<property>\n\t<name>%s</name>\n\t<value>%s</value>\n</property>\n"
+  str = ''
+  hash = node['mapr']['config']['yarn-site.xml']
+  hash.each do |key, value|
+    property = format(yarnconfig, key, value)
+    str.concat(property)
+  end
+  str
+end
+
 cldb_nodes = service_nodes('cldb')
 zk_nodes = service_nodes('zk')
 rm_nodes = service_nodes('rm')
@@ -39,27 +50,14 @@ execute 'Run configure.sh to configure cluster' do
 end
 
 ## Alter yarn-site.xml
+yarnconf = render_config
 ruby_block 'Configure yarn-site.xml' do
   block do
     Dir.glob('/opt/mapr/hadoop/hadoop-*/etc/hadoop/yarn-site.xml').each do |fn|
       file = Chef::Util::FileEdit.new(fn)
       file.insert_line_after_match(
         '<!-- :::CAUTION::: DO NOT EDIT ANYTHING ON OR ABOVE THIS LINE -->',
-        <<-EOF
-  <property>
-    <name>yarn.nodemanager.resource.cpu-vcores</name>
-    <value>8</value>
-  </property>
-  <property>
-    <name>yarn.nodemanager.resource.memory-mb</name>
-    <value>150000</value>
-  </property>
-  <property>
-    <name>yarn.log-aggregation-enable</name>
-    <value>true</value>
-  </property>
-
-EOF
+        yarnconf
       )
       file.write_file
     end

@@ -14,13 +14,12 @@ def service_node(role_name)
 end
 
 def render_config
+  yarnconfig = "<property>\n\t<name>%s</name>\n\t<value>%s</value>\n</property>\n"
   str = ''
   hash = node['mapr']['config']['yarn-site.xml']
   hash.each do |key, value|
-    str.concat("<property>\n")
-    str.concat("\t<name>""#{key}""</name>\n")
-    str.concat("\t<value>""#{value}""</value>\n")
-    str.concat("</property>\n")
+    property = format(yarnconfig, key, value)
+    str.concat(property)
   end
   str
 end
@@ -49,8 +48,6 @@ config_command = config_command.join(' ')
 execute 'Run configure.sh to configure cluster' do
   command config_command
 end
-
-
 
 ## Alter yarn-site.xml
 yarnconf = render_config

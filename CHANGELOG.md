@@ -3,6 +3,11 @@ mapr_installation CHANGELOG
 
 This file is used to list changes made in each version of the mapr_installation cookbook.
 
+0.3.11
+-----
+- [eric moritz] - DL-60 compensated for missing node['etc']['passwd'] keys
+
+
 0.3.10
 -----
 - [hari rajaram] - DL-304 yarn configuration, added 1 more property for scheduler and made it configurable as attribute.

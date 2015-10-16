@@ -4,7 +4,7 @@ log "\n=========== Start MapR ssh.rb =============\n"
 # Install keys using the users databag
 ########################################
 def _io_user_data(username)
-  node['etc']['passwd'][username] || {
+  (node['etc'] && node['etc']['passwd'] && node['etc']['passwd'][username]) || {
     'uid' => username,
     'gid' => username,
     'dir' => "/home/#{username}"
@@ -29,6 +29,7 @@ end
 
 (node['ssh_keys'] || {}).each do |username, _|
   user_data = _io_user_data(username)
+  next unless user_data
   private_keys = _io_data_bag_user_private_keys(username)
   home = user_data['dir']
   private_key_files = user_to_private_keys(home, private_keys)

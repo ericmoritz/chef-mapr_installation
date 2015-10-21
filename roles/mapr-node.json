@@ -3,6 +3,26 @@
   "chef_type": "role",
   "json_class": "Chef::Role",
   "default_attributes": {
+    "yum": {
+      "base": {
+        "enabled": false
+      },
+      "contrib": {
+        "enabled": false
+      },
+      "extras": {
+        "enabled": false
+      },
+      "centosplus": {
+        "enabled": false
+      },
+      "updates": {
+        "enabled": false
+      },
+      "gmti_base": {
+        "enabled": false
+      }
+    },
     "splunk": {
       "client-name": {
         "production": "GD-GDP-PROD-DATALAKE-LX",
@@ -21,7 +41,10 @@
     }
   },
   "run_list": [
-    "recipe[gdp-base-linux]",
+    "recipe[users]",
+    "recipe[sudo]",
+    "recipe[ssh-keys]",
+    "recipe[yum-gmti::default]",
     "recipe[mapr_installation::default]"
   ]
 }

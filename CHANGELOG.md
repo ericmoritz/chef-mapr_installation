@@ -3,6 +3,15 @@ mapr_installation CHANGELOG
 
 This file is used to list changes made in each version of the mapr_installation cookbook.
 
+0.3.14
+-----
+- [eric moritz] - DL-60 fixed the java version to 1.7.0-79
+
+
+0.3.13
+-----
+- [eric moritz] - DL-60 fixed the java version to 1.7.0-79
+
 0.3.12
 -----
 - [eric moritz] - DL-60 fixed the java version to 1.7.0

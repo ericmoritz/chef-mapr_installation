@@ -3,6 +3,10 @@ mapr_installation CHANGELOG
 
 This file is used to list changes made in each version of the mapr_installation cookbook.
 
+0.3.16
+-----
+- [eric moritz] - DL-411 hardcoded the scalrizer ports for now
+
 0.3.15
 -----
 - [eric moritz] - DL-411 added a firewall recipe

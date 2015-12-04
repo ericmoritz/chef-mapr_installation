@@ -1,12 +1,16 @@
 # -*- encoding: utf-8 -*-
 source 'https://rubygems.org'
 
+gem 'rake'
+gem 'berkshelf'
+gem 'chef-handler-profiler'
+gem 'rubocop', '0.33.0'
+gem 'chef-sugar'
+gem 'fauxhai'
+
 group :test do
-  gem 'berkshelf', '~> 3.1'
   gem 'chefspec', '>= 3.1'
   gem 'foodcritic', '>= 3.0'
-  gem 'rake', '>= 10.2'
-  gem 'rubocop', '= 0.33.0'
 end
 
 group :integration do
@@ -21,5 +25,4 @@ group :integration do
 end
 group :development do
   gem 'webmock'
-  gem 'fauxhai'
 end

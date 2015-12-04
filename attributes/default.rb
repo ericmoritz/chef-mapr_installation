@@ -30,3 +30,46 @@ default['mapr']['versions'] = {
 default['mapr']['config']['yarn-site.xml'] = { 'yarn.nodemanager.resource.cpu-vcores' => '8', 'yarn.nodemanager.resource.memory-mb' => '25000',
                                                'yarn.log-aggregation-enable' => 'true', 'yarn.scheduler.maximum-allocation-mb' => '22000'
 }
+
+default['mapr']['firewall_rules'] = [
+  {
+    'name' => 'cldb',
+    'port' => 7222
+  },
+  {
+    'name' => 'cldb-web',
+    'port' => 7221
+  },
+  {
+    'name' => 'hms',
+    'port' => 9083
+  },
+  {
+    'name' => 'hs2',
+    'port' => 10000
+  },
+  {
+    'name' => 'hue',
+    'port' => 8888
+  },
+  {
+    'name' => 'impala-server',
+    'port' => 21000
+  },
+  {
+    'name' => 'nfs',
+    'port' => 2049
+  },
+  {
+    'name' => 'oozie',
+    'port' => 11000
+  },
+  {
+    'name' => 'rm-web',
+    'port' => 8088
+  },
+  {
+    'name' => 'ws',
+    'port' => 8080
+  }
+]

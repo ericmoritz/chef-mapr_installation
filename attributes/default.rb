@@ -41,10 +41,6 @@ default['mapr']['firewall_rules'] = [
     'port' => 7221
   },
   {
-    'name' => 'hms',
-    'port' => 9083
-  },
-  {
     'name' => 'hs2',
     'port' => 10000
   },
@@ -53,16 +49,12 @@ default['mapr']['firewall_rules'] = [
     'port' => 8888
   },
   {
-    'name' => 'impala-server',
-    'port' => 21000
-  },
-  {
-    'name' => 'nfs',
-    'port' => 2049
-  },
-  {
     'name' => 'oozie',
     'port' => 11000
+  },
+  {
+    'name' => 'impala-server',
+    'port' => 21000
   },
   {
     'name' => 'rm-web',

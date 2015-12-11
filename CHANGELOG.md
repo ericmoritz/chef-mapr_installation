@@ -3,7 +3,7 @@ mapr_installation CHANGELOG
 
 This file is used to list changes made in each version of the mapr_installation cookbook.
 
-0.3.16
+0.3.17
 -----
 - [eric moritz] - DL-425 Added Sqoop1 support
 

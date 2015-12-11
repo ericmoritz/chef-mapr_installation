@@ -5,6 +5,10 @@ This file is used to list changes made in each version of the mapr_installation 
 
 0.3.16
 -----
+- [eric moritz] - DL-425 Added Sqoop1 support
+
+0.3.16
+-----
 - [eric moritz] - DL-411 hardcoded the scalrizer ports for now
 
 0.3.15

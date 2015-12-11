@@ -11,7 +11,7 @@ describe 'mapr_installation::sqoop' do
   
   it 'should install the sqoop package' do
     expect(chef_run).to install_package(
-                          "sqoop"
+                          "mapr-sqoop"
                         ).with(
                           version: "1.4.4.201411051136-1"
                         )

@@ -3,6 +3,10 @@ mapr_installation CHANGELOG
 
 This file is used to list changes made in each version of the mapr_installation cookbook.
 
+0.3.19
+-----
+- [eric moritz] - DL-425 fixed the name of the sqoop package
+
 0.3.18
 -----
 - [eric moritz] - DL-425 Forgot to include sqoop in default

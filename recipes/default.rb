@@ -17,3 +17,4 @@ include_recipe 'mapr_installation::mapr_configure'
 include_recipe 'mapr_installation::mapr_disksetup'
 
 include_recipe 'mapr_installation::mapr_start_up'
+include_recipe 'mapr_installation::sqoop'

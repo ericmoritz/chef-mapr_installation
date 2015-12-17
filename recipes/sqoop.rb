@@ -16,7 +16,11 @@ if role?('sqoop')
   end
 
   if node['mapr']['jobs']
-    sqoop_data_bag = data_bag_item('mapr', 'sqoop')
+    sqoop_data_bag = begin
+                       data_bag_item('mapr', 'sqoop')
+                     rescue Net::HTTPServerException
+                       {}
+                     end
     node['mapr']['jobs'].each do |job_name, job_data|
       job_data['entities'].each do |entity_name, entity_data|
         options_content = entity_data['sqoop_options'].join("\n") + "\n"

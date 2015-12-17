@@ -10,7 +10,7 @@ describe 'mapr_installation::sqoop' do
       node.set['mapr']['jobs']['userStore'] = {
         'entities' => {
           'userStore_L1' => {
-            'sqoop_databag' => 'userStore',
+            'sqoop_data_bag' => 'userStore',
             'sqoop_options' => [
                 'import',
                 '',

@@ -3,8 +3,8 @@ def role?(role_name)
 end
 
 # returns a password, maybe
-def get_entity_password(databag_key, data_bag_data)
-  entity_data_bag_data = data_bag_data[databag_key]
+def get_entity_password(data_bag_key, data_bag_data)
+  entity_data_bag_data = data_bag_data[data_bag_key]
   entity_data_bag_data['password'] if entity_data_bag_data &&
                                       entity_data_bag_data['password']
 end
@@ -20,9 +20,9 @@ if role?('sqoop')
     node['mapr']['jobs'].each do |job_name, job_data|
       job_data['entities'].each do |entity_name, entity_data|
         options_content = entity_data['sqoop_options'].join("\n") + "\n"
-        entity_sqoop_databag_key = entity_data['sqoop_databag']
+        entity_sqoop_data_bag_key = entity_data['sqoop_data_bag']
         entity_password = get_entity_password(
-          entity_data['sqoop_databag'],
+          entity_data['sqoop_data_bag'],
           sqoop_data_bag
         )
         entity_conf_dir = "/opt/mapr/jobs/#{job_name}/conf"
@@ -41,7 +41,7 @@ if role?('sqoop')
           mode '444'
         end
 
-        file "#{entity_conf_dir}/sqoop_#{entity_sqoop_databag_key}.password" do
+        file "#{entity_conf_dir}/sqoop_#{entity_sqoop_data_bag_key}.password" do
           content entity_password
           owner 'mapr'
           group 'mapr'

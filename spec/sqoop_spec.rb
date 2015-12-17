@@ -15,13 +15,25 @@ describe 'mapr_installation::sqoop' do
                 'import',
                 '',
                 '--connect',
-                'jdbc:sqlserver://example.com;databaseName=foo'
+                'jdbc:sqlserver://example.com;databaseName=foo',
+                '--password-file',
+                '/opt/mapr/jobs/userStore/conf/sqoop_userStore.password'
               ]
           }
         }
       }
     end.converge(described_recipe)
   }
+
+  before do
+    stub_data_bag_item('mapr', 'sqoop').and_return(
+      {
+        "userStore" => {
+          "password" => "dummyPassword"
+        }
+      }
+    )
+  end
   
   it 'should install the sqoop package' do
     expect(chef_run).to install_package(
@@ -33,17 +45,30 @@ describe 'mapr_installation::sqoop' do
 
   it 'should create an option file' do
     expect(chef_run).to create_file(
-                          '/opt/mapr/jobs/userStore/conf/sqoop_userStore_L1.options'
-                        )
-                         .with(
+      '/opt/mapr/jobs/userStore/conf/sqoop_userStore_L1.options'
+    ).with(
+                           owner: 'mapr',
+                           group: 'mapr',
+                           mode: '444',
                            content: %{import
 
 --connect
 jdbc:sqlserver://example.com;databaseName=foo
-},
-                           owner: 'mapr',
-                           group: 'mapr',
-                           mode: '664'
-                         )
+--password-file
+/opt/mapr/jobs/userStore/conf/sqoop_userStore.password
+}
+                        )
   end
+
+  it 'should create a password file' do
+    expect(chef_run).to create_file(
+        '/opt/mapr/jobs/userStore/conf/sqoop_userStore.password'
+    ).with(
+                          owner: 'mapr',
+                          group: 'mapr',
+                          mode: '440',
+                          content: 'dummyPassword'
+                        )
+  end
+
 end
